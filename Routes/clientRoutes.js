@@ -21,4 +21,10 @@ router.post(`${BaseUrl.client}/user/login`, userController.login);
 //   userController.changePassword
 // );
 
+router.post(
+  `${BaseUrl.client}/add-stock`,
+  authMiddleware,
+  userController.addStock
+);
+
 module.exports = router;
