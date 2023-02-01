@@ -27,4 +27,22 @@ router.post(
   userController.addStock
 );
 
+router.get(
+  `${BaseUrl.client}/get/all-users`,
+  authMiddleware,
+  userController.getAllUsers
+);
+
+router.get(
+  `${BaseUrl.client}/get/all-records`,
+  authMiddleware,
+  userController.getAllRecords
+);
+
+router.get(
+  `${BaseUrl.client}/get/all-stocks`,
+  authMiddleware,
+  userController.getAllStocks
+);
+
 module.exports = router;
