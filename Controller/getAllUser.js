@@ -10,7 +10,7 @@ const getAllUSers = async function (req, res) {
       return res.send({
         status: true,
         message: "users fetched successfully",
-        payload: result,
+        data: result,
       });
     }
   } catch (error) {
