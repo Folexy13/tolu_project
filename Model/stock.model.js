@@ -18,8 +18,8 @@ const stockSchema = new Schema(
       type: String,
       required: true,
     },
-    type: { type: String, required: true },
-    size: { type: String, required: true },
+    type: { type: String },
+    size: { type: String },
     description: {
       type: String,
       required: true,
