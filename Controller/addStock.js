@@ -9,7 +9,14 @@ const Stock = async function (req, res) {
       type,
       size,
       stockName,
-      description: `${size} * ${type} * ${stockName}`,
+      description:
+        size && type
+          ? `${size} * ${type} * ${stockName}`
+          : size && !type
+          ? `${size} * ${stockName}`
+          : !size && type
+          ? `${type} * ${stockName}`
+          : `${stockName}`,
     });
     const savedItem = await newStock.save();
     if (savedItem) {
