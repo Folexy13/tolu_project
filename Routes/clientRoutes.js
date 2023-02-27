@@ -53,7 +53,7 @@ router.get(
 
 router.get(
   `${BaseUrl.client}/search/:page`,
-  // authMiddleware,
+  authMiddleware,
   userController.searchParams
 );
 
