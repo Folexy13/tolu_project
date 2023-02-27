@@ -6,6 +6,7 @@ const getAllUsers = require("./getAllUser");
 const getAllRecords = require("./getAllRecord");
 const getAllStocks = require("./getAllStocks");
 const searchParams = require("./stockSearch");
+const updateStock = require("./updateThreshold");
 
 const userController = {
   signup,
@@ -15,6 +16,7 @@ const userController = {
   getAllUsers,
   getAllRecords,
   getAllStocks,
+  updateStock,
   searchParams,
 };
 

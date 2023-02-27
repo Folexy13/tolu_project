@@ -57,4 +57,10 @@ router.get(
   userController.searchParams
 );
 
+router.post(
+  `${BaseUrl.client}/update`,
+  // authMiddleware,
+  userController.updateStock
+);
+
 module.exports = router;
