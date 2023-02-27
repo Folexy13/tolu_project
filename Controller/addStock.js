@@ -2,13 +2,14 @@ const stockModel = require("../Model/stock.model");
 
 const Stock = async function (req, res) {
   try {
-    const { location, quantity, type, size, stockName } = req.body;
+    const { location, quantity, type, size, stockName, threshold } = req.body;
     const newStock = new stockModel({
       location,
       quantity,
       type,
       size,
       stockName,
+      threshold,
       description:
         size && type
           ? `${size} x ${type} x ${stockName}`

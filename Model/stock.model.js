@@ -18,6 +18,10 @@ const stockSchema = new Schema(
       type: String,
       required: true,
     },
+    threshold: {
+      type: Number,
+      required: true,
+    },
     type: { type: String },
     size: { type: String },
     description: {
