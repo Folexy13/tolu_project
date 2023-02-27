@@ -5,6 +5,7 @@ const addRequest = require("./addRequest");
 const getAllUsers = require("./getAllUser");
 const getAllRecords = require("./getAllRecord");
 const getAllStocks = require("./getAllStocks");
+const searchParams = require("./stockSearch");
 
 const userController = {
   signup,
@@ -14,6 +15,7 @@ const userController = {
   getAllUsers,
   getAllRecords,
   getAllStocks,
+  searchParams,
 };
 
 module.exports = userController;

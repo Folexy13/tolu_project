@@ -21,28 +21,40 @@ router.post(`${BaseUrl.client}/user/login`, userController.login);
 //   userController.changePassword
 // );
 
+//Add stock
 router.post(
   `${BaseUrl.client}/add-stock`,
   authMiddleware,
   userController.addStock
 );
 
+//Get all users
 router.get(
   `${BaseUrl.client}/get/all-users`,
   authMiddleware,
   userController.getAllUsers
 );
 
+//Get all records
 router.get(
   `${BaseUrl.client}/get/all-records`,
   authMiddleware,
   userController.getAllRecords
 );
 
+//Get all stocks
 router.get(
   `${BaseUrl.client}/get/all-stocks`,
   authMiddleware,
   userController.getAllStocks
+);
+
+//Implement Search
+
+router.get(
+  `${BaseUrl.client}/search/:page`,
+  // authMiddleware,
+  userController.searchParams
 );
 
 module.exports = router;

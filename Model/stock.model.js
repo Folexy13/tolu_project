@@ -34,5 +34,6 @@ const stockSchema = new Schema(
   { timestamps: true }
 );
 
+stockSchema.index({ title: "text", description: "text", tags: "text" });
 const Stock = mongoose.model("Stock", stockSchema);
 module.exports = Stock;
