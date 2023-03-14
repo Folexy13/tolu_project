@@ -10,10 +10,10 @@ const requestSchema = new Schema(
       type: String,
       required: true,
     },
-    // itemDescription: {
-    //   type: String,
-    //   required: true,
-    // },
+    itemDescription: {
+      type: String,
+      required: true,
+    },
     quantity: {
       type: Number,
       required: true,

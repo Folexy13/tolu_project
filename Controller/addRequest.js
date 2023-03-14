@@ -3,18 +3,26 @@ const recordModel = require("../Model/record.model");
 
 const Request = async function (req, res) {
   try {
-    const { designation, quantity, collectorName, issuerName, stockItem } =
-      req.body;
+    const {
+      designation,
+      quantity,
+      collectorName,
+      issuerName,
+      itemDescription,
+      stockItem,
+    } = req.body;
     const newRequest = new requestModel({
       designation,
       quantity,
       collectorName,
       issuerName,
+      itemDescription,
       stockItem,
     });
     const newRecord = new recordModel({
       designation,
       collectorName,
+      itemDescription,
       stockItem,
     });
     const savedItem = await newRequest.save();

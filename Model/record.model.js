@@ -9,7 +9,10 @@ const recordSchema = new Schema(
     collectorName: {
       type: String,
       required: true,
-      unique: true,
+    },
+    itemDescription: {
+      type: String,
+      required: true,
     },
     issuerName: {
       type: String,
