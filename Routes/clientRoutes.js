@@ -59,8 +59,14 @@ router.get(
 
 router.post(
   `${BaseUrl.client}/update`,
-  // authMiddleware,
+  authMiddleware,
   userController.updateStock
+);
+
+router.post(
+  `${BaseUrl.client}/add-request`,
+  authMiddleware,
+  userController.addRequest
 );
 
 module.exports = router;
