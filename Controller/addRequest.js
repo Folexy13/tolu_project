@@ -1,5 +1,6 @@
-const requestModel = require("../Model/stock.model");
+const requestModel = require("../Model/request.model");
 const recordModel = require("../Model/record.model");
+const stockModel = require("../Model/stock.model");
 
 const Request = async function (req, res) {
   try {
@@ -11,6 +12,9 @@ const Request = async function (req, res) {
       itemDescription,
       stockItem,
     } = req.body;
+    const isStockUpdated = await stockModel.findByIdAndUpdate(stockItem, {
+      $inc: { quantity: -quantity },
+    });
     const newRequest = new requestModel({
       designation,
       quantity,
@@ -27,7 +31,7 @@ const Request = async function (req, res) {
     });
     const savedItem = await newRequest.save();
     const savedRecord = await newRecord.save();
-    if (savedItem && savedRecord) {
+    if (savedItem && savedRecord && isStockUpdated) {
       return res.send({
         status: true,
         message: "Request made successfully",
