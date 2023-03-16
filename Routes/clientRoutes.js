@@ -42,6 +42,12 @@ router.get(
   userController.getAllRecords
 );
 
+//get Recent Transactions
+router.get(
+  `${BaseUrl.client}/get/recent-records`,
+  authMiddleware,
+  userController.getRecentRecords
+);
 //Get all stocks
 router.get(
   `${BaseUrl.client}/get/all-stocks`,
@@ -57,12 +63,14 @@ router.get(
   userController.searchParams
 );
 
+//Upload stock Threshold
 router.post(
   `${BaseUrl.client}/update`,
   authMiddleware,
   userController.updateStock
 );
 
+//Request For Stock
 router.post(
   `${BaseUrl.client}/add-request`,
   authMiddleware,

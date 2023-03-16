@@ -5,6 +5,7 @@ const addRequest = require("./addRequest");
 const getAllUsers = require("./getAllUser");
 const getAllRecords = require("./getAllRecord");
 const getAllStocks = require("./getAllStocks");
+const getRecentRecords = require("./getRecentRecords");
 const searchParams = require("./stockSearch");
 const updateStock = require("./updateThreshold");
 
@@ -15,6 +16,7 @@ const userController = {
   addRequest,
   getAllUsers,
   getAllRecords,
+  getRecentRecords,
   getAllStocks,
   updateStock,
   searchParams,
