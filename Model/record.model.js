@@ -14,6 +14,10 @@ const recordSchema = new Schema(
       type: String,
       required: true,
     },
+    status: {
+      type: String,
+      required: true,
+    },
     issuerName: {
       type: String,
     },
