@@ -28,6 +28,8 @@ const Request = async function (req, res) {
       collectorName,
       itemDescription,
       stockItem,
+      quantity,
+      issuerName,
       status: "Pending",
     });
     const savedItem = await newRequest.save();

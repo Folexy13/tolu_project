@@ -18,6 +18,10 @@ const recordSchema = new Schema(
       type: String,
       required: true,
     },
+    quantity: {
+      type: String,
+      required: true,
+    },
     issuerName: {
       type: String,
     },
