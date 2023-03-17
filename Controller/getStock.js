@@ -3,7 +3,7 @@ const stockModel = require("../Model/stock.model");
 const getStock = async function (req, res) {
   try {
     const { id } = req.params;
-    const stockInstance = await stockModel.findById(id).populate("stockItem");
+    const stockInstance = await stockModel.findById(id);
     if (stockInstance) {
       return res.send({
         status: true,
