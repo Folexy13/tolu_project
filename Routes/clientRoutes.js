@@ -55,6 +55,13 @@ router.get(
   userController.getAllStocks
 );
 
+//Get stock
+router.get(
+  `${BaseUrl.client}/get/stock/:id`,
+  authMiddleware,
+  userController.getStock
+);
+
 //Implement Search
 
 router.get(

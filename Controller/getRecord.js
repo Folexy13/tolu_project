@@ -10,7 +10,7 @@ const getRecord = async function (req, res) {
       return res.send({
         status: true,
         message: "Record fetched successfully",
-        payload: result,
+        payload: recordInstance,
       });
     }
   } catch (error) {
