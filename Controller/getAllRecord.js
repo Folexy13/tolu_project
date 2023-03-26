@@ -8,7 +8,7 @@ const getAllRecord = async function (req, res) {
       .find({})
       .populate("stockItem")
       .sort({ _id: -1 });
-    const result = paginate(recordInstance, page);
+    const result = page ? paginate(recordInstance, page) : recordInstance;
     if (result) {
       return res.send({
         status: true,
