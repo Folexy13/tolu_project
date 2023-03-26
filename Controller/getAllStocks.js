@@ -4,11 +4,11 @@ const paginate = require("../utils/paginateData");
 const getAllStocks = async function (req, res) {
   try {
     const { page } = req.query;
-    const stockInstance = await recordModel
+    const allStocks = await recordModel
       .find({})
       .populate("recordItem")
       .sort({ _id: -1 });
-    const result = paginate(stockInstance, page);
+    const result = page ? paginate(allStocks, page) : allStocks;
     if (result) {
       return res.send({
         status: true,
