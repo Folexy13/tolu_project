@@ -4,6 +4,9 @@ const reel = require("node-reel-cron");
 const cookieParser = require("cookie-parser");
 const sgMail = require("@sendgrid/mail");
 const cors = require("cors");
+const axios = require("axios");
+const StockModel = require("./Model/stock.model");
+
 // const MerithubToken = require("./Model/systemModel/tokenModel");
 const app = express();
 require("dotenv").config();
@@ -13,6 +16,18 @@ const clientRoutes = require("./Routes/clientRoutes");
 // const connection_string = process.env.CONNECTION_STRING_LIVE;
 const connection_string = process.env.CONNECTION_STRING_DEV;
 const PORT = process.env.PORT || 4000;
+let outOfThreshold = [];
+
+const CheckInventory = async () => {
+  const stocks = await StockModel.find();
+  for (let i = 0; i < stocks.length; i++) {
+    if (stocks[i].threshold > stocks[i].quantity) {
+      outOfThreshold.push(stocks[i]);
+    }
+  }
+};
+
+CheckInventory();
 mongoose.set("strictQuery", false);
 //create connection to mongodb database
 mongoose
@@ -39,10 +54,27 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.send({ message: "Server is Live" });
 });
+app.post("/webhook", async (req, res) => {
+  console.log("Webhook data received:", req.body);
+  // Perform any necessary actions based on data received
+  res.send({
+    msg: "Webhook received successfully",
+    data: outOfThreshold,
+  });
+});
 
 reel()
-  .call(() => {
+  .call(async () => {
     //  refresh  every 15 minutes
+    axios
+      .post("https://tolu-api.onrender.com/webhook", {})
+      .then((res) => {
+        console.log("Webhook called successfully");
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.error("Error calling webhook:", error);
+      });
     console.log("It's five minute now");
   })
   .everyFiveMinutes()
