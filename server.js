@@ -54,7 +54,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.send({ message: "Server is Live" });
 });
-app.post("/webhook", async (req, res) => {
+app.post("/api/v1/webhook", async (req, res) => {
   console.log("Webhook data received:", req.body);
   // Perform any necessary actions based on data received
   res.send({
@@ -67,7 +67,7 @@ reel()
   .call(async () => {
     //  refresh  every 15 minutes
     axios
-      .post("https://tolu-api.onrender.com/webhook", {})
+      .post("https://tolu-api.onrender.com/api/v1webhook", {})
       .then((res) => {
         console.log("Webhook called successfully");
         console.log(res.data);
