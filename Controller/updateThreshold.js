@@ -5,7 +5,7 @@ const updateStock = async function (req, res) {
     const { id, threshold } = req.body;
     const updateStockLevel = await stockModel.findByIdAndUpdate(
       { _id: id },
-      { $inc: { threshold } }
+      { $inc: { threshold: Number(threshold) } }
     );
     if (updateStockLevel) {
       return res.status(200).send({
