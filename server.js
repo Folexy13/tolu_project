@@ -67,7 +67,7 @@ reel()
   .call(async () => {
     //  refresh  every 15 minutes
     axios
-      .post("https://tolu-api.onrender.com/api/v1webhook", {})
+      .post("https://tolu-api.onrender.com/api/v1/webhook", {})
       .then((res) => {
         console.log("Webhook called successfully");
         console.log(res.data);

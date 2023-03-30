@@ -73,7 +73,7 @@ router.get(
 //Upload stock Threshold
 router.post(
   `${BaseUrl.client}/update`,
-  authMiddleware,
+  // authMiddleware,
   userController.updateStock
 );
 
