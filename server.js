@@ -6,6 +6,7 @@ const sgMail = require("@sendgrid/mail");
 const cors = require("cors");
 const axios = require("axios");
 const StockModel = require("./Model/stock.model");
+const email = require("./EmailTemp/AcceptedClassEmail")
 
 // const MerithubToken = require("./Model/systemModel/tokenModel");
 const app = express();
@@ -20,6 +21,15 @@ let outOfThreshold = [];
 
 const CheckInventory = async () => {
   const stocks = await StockModel.find();
+  const now = new Date();
+  const eventDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 8, 0, 0, 0).toISOString();
+  // Calculate the time difference between now and the event date
+  const diffMs = now - eventDate;
+  // Convert the time difference to hours
+  const diffHours = diffMs / (1000 * 60 * 60);
+  if (diffHours > 24) {
+  await email('bolatoluemmanuel@gmailcom',stocks.length)
+  } 
   for (let i = 0; i < stocks.length; i++) {
     if (stocks[i].threshold >= stocks[i].quantity) {
       outOfThreshold.push(stocks[i]);
