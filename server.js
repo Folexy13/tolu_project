@@ -78,7 +78,6 @@ app.post("/api/v1/webhook", async (req, res) => {
 
 reel()
   .call(async () => {
-  CheckInventory();
     //  refresh  every 15 minutes
     axios
       .post("https://tolu-api.onrender.com/api/v1/webhook", {})
