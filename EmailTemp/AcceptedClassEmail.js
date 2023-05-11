@@ -2,23 +2,14 @@ const sgMail = require("@sendgrid/mail");
 require("dotenv").config();
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-const AcceptedClassEmail = async (tutorFullname, email, classDetails) => {
+const AcceptedClassEmail = async (email,quantity) => {
   const msg = {
     to: email,
-    from: "donotreply@klasshour.com", // Use the email address or domain you verified above
-    subject: "Your Scheduled Class 🎉🎉",
-    text: "Klasshour",
+    from: "Customer Support<folajimiopeyemisax13@gmail.com>", // Use the email address or domain you verified above
+    subject: "Stock need to be re-ordered ASAP!!!",
+    text: "Urgent!!",
     html: `
-    <p>Your Class has been scheduled.  </p>
-    <p>The name of your tutor is ${tutorFullname}</p>
-    <p>Your class has being scheduled to hold ${new Date(
-      classDetails.startTime
-    ).toLocaleString()}</p>
-    <p>You can join the class via this link <b><a href=${
-      classDetails.classLink
-    }>Test link</a></b></p>
-    <p>Stay tuned</p>
-    <p> <i>Klasshour Teams.</i> </p>
+    <p>${quantity} Stock item(s) need to be restocked as they have exceeded thier threshold limit.  </p>
     `,
   };
 
