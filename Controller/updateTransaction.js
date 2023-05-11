@@ -4,7 +4,7 @@ const updateStock = async function (req, res) {
     const { id, field,type } = req.body;
     const updateStockLevel = await stockModel.findByIdAndUpdate(
       { _id: id },
-     { { status: Number(field)  },
+     { status: field  },
       { new: true }
     );
     if (updateStockLevel) {
