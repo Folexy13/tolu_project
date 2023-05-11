@@ -1,4 +1,4 @@
-const stockModel = require("../Model/transaction.model");
+const stockModel = require("../Model/record.model");
 const updateStock = async function (req, res) {
   try {
     const { id, field,type } = req.body;
