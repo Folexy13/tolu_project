@@ -32,7 +32,7 @@ const CheckInventory = async () => {
   } 
   for (let i = 0; i < stocks.length; i++) {
     if (stocks[i].threshold >= stocks[i].quantity) {
-        const objectExists = outOfThreshold.some(item => item._id === stocks[i]._id && item.stockName === stocks[i].stockName);
+        const objectExists = outOfThreshold.some(item => item._id === stocks[i]._id);
      if(!objectExists){
        outOfThreshold.push(stocks[i]);
      }
