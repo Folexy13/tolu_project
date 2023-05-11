@@ -79,7 +79,7 @@ router.post(
 router.post(
   `${BaseUrl.client}/update_v2`,
   authMiddleware,
-  userController.updateStock
+  userController.updateTransaction
 );
 
 //Request For Stock
