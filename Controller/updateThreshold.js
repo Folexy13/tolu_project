@@ -2,10 +2,10 @@ const stockModel = require("../Model/stock.model");
 const pagainate = require("../utils/paginateData");
 const updateStock = async function (req, res) {
   try {
-    const { id, threshold } = req.body;
+    const { id, field,type } = req.body;
     const updateStockLevel = await stockModel.findByIdAndUpdate(
       { _id: id },
-      { $inc: { quantity: Number(threshold) } },
+      type === 'status' ? { status: field } : { $inc: { quantity: Number(field) } },
       { new: true }
     );
     if (updateStockLevel) {
