@@ -31,8 +31,11 @@ const CheckInventory = async () => {
   await email('bolatoluemmanuel@gmailcom',stocks.length)
   } 
   for (let i = 0; i < stocks.length; i++) {
-    if (stocks[i].threshold >= stocks[i].quantity) {
-      outOfThreshold.push(stocks[i]);
+    if (stocks[i].threshold >= stocks[i].quantity && ) {
+        const objectExists = outOfThreshold.some(item => item._id === stocks[i]._id && item.stockName === stocks[i].stockName);
+     if(!objectExists){
+       outOfThreshold.push(stocks[i]);
+     }
     }
   }
 };
