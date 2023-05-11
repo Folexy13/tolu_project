@@ -76,6 +76,11 @@ router.post(
   authMiddleware,
   userController.updateStock
 );
+router.post(
+  `${BaseUrl.client}/update_v2`,
+  authMiddleware,
+  userController.updateStock
+);
 
 //Request For Stock
 router.post(
