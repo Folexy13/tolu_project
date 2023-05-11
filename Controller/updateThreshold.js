@@ -8,6 +8,7 @@ const updateStock = async function (req, res) {
       type === 'status' ? { status: field } : { $inc: { quantity: Number(field) } },
       { new: true }
     );
+    console.log(updateStockLevel)
     if (updateStockLevel) {
       return res.status(200).send({
         status: true,
