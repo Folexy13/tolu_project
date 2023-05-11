@@ -9,6 +9,7 @@ const getStock = require("./getStock");
 const getRecentRecords = require("./getRecentRecords");
 const searchParams = require("./stockSearch");
 const updateStock = require("./updateThreshold");
+const updateTransaction = require('./updateTransaction');
 const CheckInventory = require("./Inventory");
 
 const userController = {
@@ -24,6 +25,7 @@ const userController = {
   updateStock,
   searchParams,
   CheckInventory,
+  updateTransaction
 };
 
 module.exports = userController;
