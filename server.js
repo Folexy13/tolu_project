@@ -21,7 +21,7 @@ let outOfThreshold = [];
 const CheckInventory = async () => {
   const stocks = await StockModel.find();
   for (let i = 0; i < stocks.length; i++) {
-    if (stocks[i].threshold > stocks[i].quantity) {
+    if (stocks[i].threshold >= stocks[i].quantity) {
       outOfThreshold.push(stocks[i]);
     }
   }
@@ -65,6 +65,7 @@ app.post("/api/v1/webhook", async (req, res) => {
 
 reel()
   .call(async () => {
+  CheckInventory();
     //  refresh  every 15 minutes
     axios
       .post("https://tolu-api.onrender.com/api/v1/webhook", {})
