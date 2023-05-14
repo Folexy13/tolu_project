@@ -7,7 +7,7 @@ const secret_key = "codebreedKHklasshour";
 const login = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await User.findOne({ email: email });
+   const user = await User.findOne({ email: email }).select('-password')
 
     if (!user) {
       return res
@@ -21,12 +21,11 @@ const login = async (req, res) => {
         .send({ status: false, message: "Invalid credentials!" });
     }
 
-    const token = jwt.sign(user.toJSON(), secret_key, { expiresIn: 604800 });
     if (user) {
       res.status(200).send({
         status: true,
         message: "Login successful",
-        token,
+        user,
       });
     }
   } catch (error) {
