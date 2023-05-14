@@ -20,13 +20,14 @@ const login = async (req, res) => {
         .status(200)
         .send({ status: false, message: "Invalid credentials!" });
     }
-  const userWithoutPassword = { ...user._doc };
-  delete userWithoutPassword.password;
+  const token = jwt.sign(user.toJSON(), secret_key, {
+        expiresIn: 604800,
+      });
     if (user) {
       res.status(200).send({
         status: true,
         message: "Login successful",
-        user:userWithoutPassword,
+        token,
       });
     }
   } catch (error) {
