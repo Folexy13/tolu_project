@@ -1,4 +1,5 @@
 const stockModel = require("../Model/stock.model");
+const axios = require('axios')
 const pagainate = require("../utils/paginateData");
 const updateStock = async function (req, res) {
   try {
@@ -10,11 +11,15 @@ const updateStock = async function (req, res) {
     );
     console.log(updateStockLevel)
     if (updateStockLevel) {
-      return res.status(200).send({
+      axios.post('https://tolu-api.onrender.com/api/v1/webhook',{}).then(res=>{
+         return res.status(200).send({
         status: true,
         message: "Update successfully",
         data: updateStockLevel,
       });
+      }
+        )
+     
     }
   } catch (error) {
     console.log(error);
