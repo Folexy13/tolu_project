@@ -7,7 +7,7 @@ const secret_key = "codebreedKHklasshour";
 const login = async (req, res) => {
   const { email, password } = req.body;
   try {
-   const user = await User.findOne({ email: email }).select('-password')
+   const user = await User.findOne({ email: email })
 
     if (!user) {
       return res
@@ -20,12 +20,13 @@ const login = async (req, res) => {
         .status(200)
         .send({ status: false, message: "Invalid credentials!" });
     }
-
+  const userWithoutPassword = { ...user._doc };
+  delete userWithoutPassword.password;
     if (user) {
       res.status(200).send({
         status: true,
         message: "Login successful",
-        user,
+        user:userWithoutPassword,
       });
     }
   } catch (error) {
