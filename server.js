@@ -28,7 +28,7 @@ const CheckInventory = async () => {
   // Convert the time difference to hours
   const diffHours = diffMs / (1000 * 60 * 60);
   if (diffHours > 24) {
-  await email('bolatoluemmanuel@gmailcom',stocks.length)
+  await email('folajimiopeyemisax13@gmailcom',stocks.length)
   } 
   for (let i = 0; i < stocks.length; i++) {
     if (stocks[i].threshold >= stocks[i].quantity) {
