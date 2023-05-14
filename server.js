@@ -73,11 +73,12 @@ app.get("/", (req, res) => {
   res.send({ message: "Server is Live" });
 });
 app.post("/api/v1/webhook", async (req, res) => {
-  console.log("Webhook data received:", req.body);
   // Perform any necessary actions based on data received
+  const set = new Set(outOfThreshold.map(item => JSON.stringify(item)));
+const uniqueArr = Array.from(set).map(item => JSON.parse(item));
   res.send({
     msg: "Webhook received successfully",
-    data: outOfThreshold,
+    data: uniqueArr,
   });
 });
 
@@ -88,13 +89,11 @@ reel()
     axios
       .post("https://tolu-api.onrender.com/api/v1/webhook", {})
       .then((res) => {
-        console.log("Webhook called successfully");
-        console.log(res.data);
       })
       .catch((error) => {
         console.error("Error calling webhook:", error);
       });
-    console.log("It's five minute now");
+    console.log("It's one minute now");
   })
   .everyMinute()
   .run();
