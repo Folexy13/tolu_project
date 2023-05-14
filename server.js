@@ -93,7 +93,6 @@ reel()
       .catch((error) => {
         console.error("Error calling webhook:", error);
       });
-    console.log("It's one minute now");
   })
   .everyMinute()
   .run();

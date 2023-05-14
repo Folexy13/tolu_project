@@ -89,4 +89,11 @@ router.post(
   userController.addRequest
 );
 
+//update user details
+router.post(
+  `${BaseUrl.client}/update/me`,
+  authMiddleware,
+  userController.updatedUser
+);
+
 module.exports = router;
