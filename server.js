@@ -28,19 +28,21 @@ const CheckInventory = async () => {
   // Convert the time difference to hours
   const diffHours = diffMs / (1000 * 60 * 60);
   if (diffHours > 24) {
-  await email('folajimiopeyemisax13@gmailcom',stocks.length)
-  } 
+    await email('folajimiopeyemisax13@gmailcom', stocks.length)
+  }
+
+  // Create a new array to keep track of stocks that have already been pushed
+  let pushedStocks = [];
+
+  // Loop through the stocks and push to outOfThreshold if the threshold is greater than the quantity
   for (let i = 0; i < stocks.length; i++) {
-    if (stocks[i].threshold >= stocks[i].quantity) {
-        const objectExists = outOfThreshold.find(item => item._id === stocks[i]._id);
-     if(!objectExists){
-       outOfThreshold.push(stocks[i]);
-     }else{
-       outOfThreshold =[]
-     }
+    if (stocks[i].threshold >= stocks[i].quantity && !pushedStocks.includes(stocks[i]._id)) {
+      outOfThreshold.push(stocks[i]);
+      pushedStocks.push(stocks[i]._id);
     }
   }
 };
+
 
 CheckInventory();
 mongoose.set("strictQuery", false);
