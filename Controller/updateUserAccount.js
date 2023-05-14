@@ -7,7 +7,7 @@ const updateUserDetails = async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hashPassword = await bcrypt.hash(password, salt);
   const secret_key = "codebreedKHklasshour";
-  const userId = req.params.userId;
+  const {userId} = req.params;
   try {
     const user = await UserModel.findById(userId);
     if (!user) {

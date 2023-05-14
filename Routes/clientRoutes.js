@@ -91,7 +91,7 @@ router.post(
 
 //update user details
 router.post(
-  `${BaseUrl.client}/update/me`,
+  `${BaseUrl.client}/update/me/:userId`,
   authMiddleware,
   userController.updatedUser
 );
