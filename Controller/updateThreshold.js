@@ -11,12 +11,14 @@ const updateStock = async function (req, res) {
     );
     console.log(updateStockLevel)
     if (updateStockLevel) {
-  axios.post('https://tolu-api.onrender.com/api/v1/webhook',{}).then(res=>{
-    res.status(200).send({
+  axios.post('https://tolu-api.onrender.com/api/v1/webhook',{}).then(data=>{
+    if (res){
+      res.status(200).send({
       status: true,
       message: "Update successfully",
       data: updateStockLevel,
     });
+    }
   });
 }
 
