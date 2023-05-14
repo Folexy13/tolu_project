@@ -93,7 +93,7 @@ reel()
       });
     console.log("It's five minute now");
   })
-  .everyFiveMinutes()
+  .everyMinute()
   .run();
 
 //server routes
