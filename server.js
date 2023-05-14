@@ -35,6 +35,8 @@ const CheckInventory = async () => {
         const objectExists = outOfThreshold.find(item => item._id === stocks[i]._id);
      if(!objectExists){
        outOfThreshold.push(stocks[i]);
+     }else{
+       outOfThreshold =[]
      }
     }
   }
@@ -79,6 +81,7 @@ app.post("/api/v1/webhook", async (req, res) => {
 reel()
   .call(async () => {
     //  refresh  every 15 minutes
+  await CheckInventory()
     axios
       .post("https://tolu-api.onrender.com/api/v1/webhook", {})
       .then((res) => {
