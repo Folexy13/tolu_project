@@ -92,7 +92,7 @@ router.post(
 //update user details
 router.post(
   `${BaseUrl.client}/update/me`,
-  authMiddleware,
+  // authMiddleware,
   userController.updatedUser
 );
 

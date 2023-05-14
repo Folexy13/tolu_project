@@ -11,7 +11,7 @@ const updateUserDetails = async (req, res) => {
   try {
     const user = await UserModel.findById(userId);
     if (!user) {
-      res.status(404).send({ status: false, message: "User not found" });
+      res.status(502).send({ status: false, message: "User not found" });
       return;
     }
     user.fullname = fullname || user.fullname;
