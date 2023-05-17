@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const updateUserDetails = async (req, res) => {
   const { fullname, password, email, imageUrl, phone } = req.body;
   const salt = await bcrypt.genSalt(10);
-  const hashPassword = await bcrypt.hash(password, salt);
+  const hashPassword =password ?  await bcrypt.hash(password, salt) :null;
   const secret_key = "codebreedKHklasshour";
   const {userId} = req.params;
   try {
