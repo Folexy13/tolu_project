@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const reel = require("node-reel-cron");
 const cookieParser = require("cookie-parser");
 const sgMail = require("@sendgrid/mail");
+const nodemailer = require('nodemailer');
 const cors = require("cors");
 const axios = require("axios");
 const StockModel = require("./Model/stock.model");
@@ -18,34 +19,68 @@ const clientRoutes = require("./Routes/clientRoutes");
 const connection_string = process.env.CONNECTION_STRING_DEV;
 const PORT = process.env.PORT || 4000;
 let outOfThreshold = [];
+const transporter = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: process.env.APP_EMAIL,
+    pass: process.env.APP_PASSWORD,
+  },
+});
+
 
 const CheckInventory = async () => {
   const stocks = await StockModel.find();
-  const now = new Date();
-  const eventDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 8, 0, 0, 0).toISOString();
-  // Calculate the time difference between now and the event date
-  const diffMs = now - eventDate;
-  // Convert the time difference to hours
-  const diffHours = diffMs / (1000 * 60 * 60);
-  if (diffHours > 24) {
-    await email('folajimiopeyemisax13@gmailcom', stocks.length);
-  } 
 
   // Filter stocks based on threshold and quantity
   const filteredStocks = stocks.filter(stock => stock.threshold >= stock.quantity);
-
   // Push only new stocks to outOfThreshold array
   filteredStocks.forEach(stock => {
     const objectExists = outOfThreshold.find(item => item._id === stock._id);
     if (!objectExists) {
       outOfThreshold.push(stock);
     }
+
+
   });
+  const set = new Set(outOfThreshold.map(item => JSON.stringify(item)));
+  const uniqueArr = Array.from(set).map(item => JSON.parse(item));
+  let htmlContent = `<h3>Dear Sir/Ma</h3>
+<p>The following items are needed to be restocked urgently:</p>
+<ol>`;
+
+uniqueArr.forEach((item) => {
+  htmlContent += `<li>${item.description}</li>`;
+});
+
+htmlContent+='</ol>'
+  const mailOptions = {
+    from: 'folajmiopeyemisax13@gmail.com',
+    to: 'bolatoluemmanuel@gmail.com, folajimiopeyemisax13@gmail.com',
+    subject: 'URGENT ATTENTION FOR STOCK!!!',
+    html:htmlContent
+  };
+  const now = new Date();
+  const eventDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 8, 0, 0, 0).toISOString();
+  // Calculate the time difference between now and the event date
+  const diffMs = Date.parse(now) - Date.parse(eventDate);
+  
+  // Convert the time difference to hours
+  const diffHours = diffMs / (1000 * 60 * 60);
+  console.log(diffHours)
+  if (diffHours< 24) {
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error('Error sending email:', error);
+      } else {
+        console.log('Email sent:', info.response);
+      }
+    });
+    // await email('folajimiopeyemisax13@gmailcom', uniqueArr.length);
+  } 
 };
 
 
 
-CheckInventory();
 mongoose.set("strictQuery", false);
 //create connection to mongodb database
 mongoose
@@ -74,8 +109,8 @@ app.get("/", (req, res) => {
 });
 app.post("/api/v1/webhook", async (req, res) => {
   // Perform any necessary actions based on data received
-  const set = new Set(outOfThreshold.map(item => JSON.stringify(item)));
-const uniqueArr = Array.from(set).map(item => JSON.parse(item));
+ 
+
   res.send({
     msg: "Webhook received successfully",
     data: uniqueArr,
@@ -89,6 +124,7 @@ reel()
     axios
       .post("https://tolu-api.onrender.com/api/v1/webhook", {})
       .then((res) => {
+        console.log('Webhook recieved')
       })
       .catch((error) => {
         console.error("Error calling webhook:", error);

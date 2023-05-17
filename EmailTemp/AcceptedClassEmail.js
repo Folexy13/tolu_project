@@ -5,7 +5,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const AcceptedClassEmail = async (email,quantity) => {
   const msg = {
     to: email,
-    from: "Customer Support<folajimiopeyemisax13@gmail.com>", // Use the email address or domain you verified above
+    from: "folajimiopeyemisax13@gmail.com ", // Use the email address or domain you verified above
     subject: "Stock need to be re-ordered ASAP!!!",
     text: "Urgent!!",
     html: `
