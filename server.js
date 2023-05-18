@@ -67,7 +67,7 @@ htmlContent+='</ol>'
   // Convert the time difference to hours
   const diffHours = diffMs / (1000 * 60 * 60);
   console.log(diffHours)
-  if (diffHours< 24) {
+  if (diffHours> 24) {
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.error('Error sending email:', error);
